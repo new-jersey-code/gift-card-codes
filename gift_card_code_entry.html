@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Card Code Entry</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        input[type="text"] { width: 200px; padding: 10px; }
+        button { padding: 10px 15px; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+
+<h2>Enter Your Gift Card Code</h2>
+<input type="text" id="codeInput" placeholder="Enter code here">
+<button onclick="openPDF()">Submit</button>
+<p id="errorMessage" class="error"></p>
+
+<script>
+    const codeToPDF = {
+        'X20': 'https://drive.google.com/file/d/1olnbBd6lK0uFh6t9u2aAwpvU1VT9KMZc/view?usp=drivesdk', // Gift card code and PDF link
+        'NEWCODE': 'https://drive.google.com/file/d/1SBqZhQBzh3NtEqa6l08_Lb6lHzvNsTPK/view?usp=drivesdk' // New gift card code and PDF link
+    };
+
+    function openPDF() {
+        const code = document.getElementById('codeInput').value;
+        const pdfURL = codeToPDF[code.toUpperCase()]; // Convert to uppercase for case insensitivity
+        const errorMessage = document.getElementById('errorMessage');
+
+        if (pdfURL) {
+            window.open(pdfURL, '_blank'); // Open the PDF in a new tab
+            errorMessage.textContent = ''; // Clear any previous error messages
+        } else {
+            errorMessage.textContent = 'Invalid code. Please try again.'; // Show error message
+        }
+    }
+</script>
+
+</body>
+</html>
+
